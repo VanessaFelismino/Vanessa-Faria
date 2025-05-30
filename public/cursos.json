@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "nome": "Tecnologia em Sistemas para Internet",
+        "sigla": "TSI",
+        "descricao": "O curso de Tecnologia em Sistemas para Internet...",
+        "coordenador": "Joice"
+    },
+    {
+        "id": 2,
+        "nome": "Bacharelado em Sistemas de Informação",
+        "sigla": "BSI",
+        "descricao": "O Curso de Sistemas de Informação...",
+        "coordenador": "Aujor"
+    },
+    {
+        "id": 3,
+        "nome": "Bacharelado em Agronomia",
+        "sigla": "AGRO",
+        "descricao": "O curso de Bacharel em Agronomia...",
+        "coordenador": "Alan"
+    }
+]

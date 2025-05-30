@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Cursos</title>
+</head>
+<body>
+  <h1>Cadastro de Curso</h1>
+  <form id="form-curso">
+    <input type="text" name="nome" placeholder="Nome" required />
+    <input type="text" name="sigla" placeholder="Sigla" required />
+    <input type="text" name="descricao" placeholder="Descrição" required />
+    <input type="text" name="coordenador" placeholder="Coordenador" required />
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <h2>Lista de Cursos</h2>
+  <ul id="lista-cursos"></ul>
+
+  <script>
+    async function carregarCursos() {
+      const res = await fetch('/api/cursos');
+      const cursos = await res.json();
+      const lista = document.getElementById('lista-cursos');
+      lista.innerHTML = '';
+      cursos.forEach(curso => {
+        const item = document.createElement('li');
+        item.textContent = `${curso.sigla} - ${curso.nome} (${curso.coordenador})`;
+        lista.appendChild(item);
+      });
+    }
+
+    document.getElementById('form-curso').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const novoCurso = {};
+      formData.forEach((value, key) => {
+        novoCurso[key] = value;
+      });
+
+      const res = await fetch('/api/cursos', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(novoCurso)
+      });
+
+      if (res.ok) {
+        alert('Curso cadastrado com sucesso!');
+        e.target.reset();
+        carregarCursos();
+      } else {
+        alert('Erro ao cadastrar o curso.');
+      }
+    });
+
+    carregarCursos();
+  </script>
+</body>
+</html>
